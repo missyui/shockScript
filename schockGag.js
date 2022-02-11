@@ -66,9 +66,7 @@ function main(data){
         while (msg.indexOf(">") > -1) msg = msg.replace(">", "&gt;");
         let shockrate = 60 - personData.level
         if (data.Sender === Player.MemberNumber&& data.Type == "Chat") {
-            if (data.Content.includes("FuturisticPanelGagMouthSetAutoInflate") && personData.shockGag) {
-                shockGag(data)
-            }
+            
             if(msg.includes("+" + Player.Name.toLowerCase())) {
                 if (msg.includes("shockgag on")&&!personData.shockGagOwnerBlock) {
                     whisper("The shock on "+Player.Name.toLowerCase()+" is activated",data.Sender)
@@ -153,6 +151,10 @@ function main(data){
                     });
             }
 
+        }else if(data.Sender === Player.MemberNumber&& data.Type == "Action"){
+            if (data.Content.includes("FuturisticPanelGagMouthSetAutoInflate") && personData.shockGag) {
+                shockGag(data)
+            }
         }
         if(personData.process>=100 && personData.level <=50){
 
