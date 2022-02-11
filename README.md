@@ -2,7 +2,7 @@
 Installation:
 1. open tampermonkey
 2. Dashboard
-3. + (new script)
+3. "+" (new script)
 4. delete all of the content of the new created script.
 5. copy paste all of that here into the new script.
 6. save the new script.
