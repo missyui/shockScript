@@ -151,7 +151,10 @@ function main(data){
             }
         }else if(data.Type == "Activity" && personData.shockBells){
             let action = getActionsTagetedAtPlayer(data)
-            if(data.Sender !== Player.MemberNumber && action!=null){
+            if(typeof action == "undefined"||action==null){
+                return
+            }
+            if(data.Sender !== Player.MemberNumber ){
                 if((InventoryIsWorn(Player,"BellClitPiercing","ItemVulvaPiercings")||
                 InventoryIsWorn(Player,"HeavyWeightClamp","ItemVulva")) &&(
                 action.includes("ChatOther-ItemVulva-MasturbateFoot") ||
@@ -204,8 +207,10 @@ function getActionsTagetedAtPlayer(data){
     let dict = data.Dictionary
     if(dict != null){
         let targetOjb = dict.find((obj) => {return obj.Tag =="TargetCharacter"})
-        if(targetOjb.MemberNumber===Player.MemberNumber){
-            return data.Content
+        if(targetOjb != null || typeof targetOjb != "undefined"){
+            if(targetOjb.MemberNumber===Player.MemberNumber){
+                return data.Content
+            }
         }
     }
     return null
@@ -287,3 +292,18 @@ function storePersonList(){
     localStorage.setItem(Player.MemberNumber+"_personList", JSON.stringify(personData));
 }
 
+/*
+error after
+{
+  "Sender": 35639,
+  "Content": "Orgasm8",
+  "Type": "Activity",
+  "Dictionary": [
+    {
+      "Tag": "SourceCharacter",
+      "Text": "Nyla",
+      "MemberNumber": 35639
+    }
+  ]
+}
+*/
