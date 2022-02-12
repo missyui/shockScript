@@ -65,6 +65,7 @@ function main(data){
         while (msg.indexOf("<") > -1) msg = msg.replace("<", "&lt;");
         while (msg.indexOf(">") > -1) msg = msg.replace(">", "&gt;");
         let shockrate = 60 - personData.level
+        let ran = Math.floor(Math.random() *4)
         if (data.Sender === Player.MemberNumber&& data.Type == "Chat") {
             if(msg.includes("+" + Player.Name.toLowerCase())) {
                 if (msg.includes("shockgag on")&&!personData.shockGagOwnerBlock) {
@@ -125,7 +126,7 @@ function main(data){
                 data.Content.includes("ItemVulva-Slap") ||
                 Math.floor(Math.random() * 1000)<shockrate)){
                 personData.process +=1
-                shock(Player,1,0)
+                shock(Player,ran,0)
                 ServerSend("ChatRoomChat",
                     {Content: "Beep", Type: "Action", Dictionary:
                             [{Tag: "Beep", Text: Player.Name+ " moves to much so that her shock bells" +
@@ -139,17 +140,47 @@ function main(data){
                   (data.Content.includes("ChatSelf-ItemBreast-Wiggle") ||
                    data.Content.includes("ChatSelf-ItemArms-Wiggle")||
                    data.Content.includes("ChatSelf-ItemTorso-Wiggle") ||
-                   data.Content.includes("ItemBreast-Slap") ||
                    Math.floor(Math.random() * 1000)<shockrate)){
                 personData.process +=1
-                shock(Player,1,2)
+                shock(Player,ran,2)
                 ServerSend("ChatRoomChat",
                     {Content: "Beep", Type: "Action", Dictionary:
                             [{Tag: "Beep", Text: Player.Name+ " moves to much so that her shock bells" +
                                     " touches her skin she gets a shock on her nipples for that. "  }]
                     });
             }
+        else if(data.Type == "Activity" && personData.shockBells){
+            let action = getActionsTagetedAtPlayer(data)
+            if(data.Sender !== Player.MemberNumber && action!=null){
+                if((InventoryIsWorn(Player,"BellClitPiercing","ItemVulvaPiercings")||
+                InventoryIsWorn(Player,"HeavyWeightClamp","ItemVulva")) &&(
+                action.includes("ChatOther-ItemVulva-MasturbateFoot") ||
+                action.includes("ChatOther-ItemVulva-Slap") ||
+                Math.floor(Math.random() * 1000)<shockrate)){
+                personData.process +=1
+                shock(Player,ran,0)
+                ServerSend("ChatRoomChat",
+                    {Content: "Beep", Type: "Action", Dictionary:
+                            [{Tag: "Beep", Text: Player.Name+ " shock bells" +
+                                    " touches her skin she gets a shock on her vulva. " }]
+                    });
 
+            }
+            if((InventoryIsWorn(Player,"BellPiercing","ItemNipplesPiercings")||
+                InventoryIsWorn(Player,"BellClamps","ItemNipples")||
+                InventoryIsWorn(Player,"NippleWeightClamps","ItemNipples") ) &&
+                  (action.includes("ChatOther-ItemNipples-Pinch") ||
+                  action.includes("ChatOther-ItemBreast-Slap") ||
+                   Math.floor(Math.random() * 1000)<shockrate)){
+                personData.process +=1
+                shock(Player,ran,2)
+                ServerSend("ChatRoomChat",
+                    {Content: "Beep", Type: "Action", Dictionary:
+                            [{Tag: "Beep", Text: Player.Name+ " shock bells" +
+                                    " touches her skin she gets a shock on her nipples."  }]
+                    });
+
+           // data.Content.includes("ItemBreast-Slap") ||
         }else if(data.Sender === Player.MemberNumber&& data.Type == "Action"){
             if (data.Content.includes("FuturisticPanelGagMouthSetAutoInflate") && personData.shockGag) {
                 shockGag(data)
@@ -168,7 +199,16 @@ function main(data){
         storePersonList()
     }
 }
-
+function getActionsTagetedAtPlayer(data){
+    let dict = data.Dictionary
+    if(dict != null){
+        let targetOjb = dict.find((obj) => {return obj.Tag =="TargetCharacter"})
+        if(targetOjb.MemberNumber===Player.MemberNumber){
+            return data.Content
+        }
+    }
+    return null
+}
 
 function shockGag(data){
     if(data.Content.includes("FuturisticPanelGagMouthSetAutoInflate")) {
