@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Yui's slave script
 // @namespace    http://tampermonkey.net/
-// @version      0.1.2
+// @version      0.1.3
 // @description  try to take over the world!
 // @author       Yui
 // @match https://bondageprojects.elementfx.com/*
@@ -65,7 +65,7 @@ function main(data){
         while (msg.indexOf("<") > -1) msg = msg.replace("<", "&lt;");
         while (msg.indexOf(">") > -1) msg = msg.replace(">", "&gt;");
         let shockrate = 60 - personData.level
-        let ran = Math.floor(Math.random() *4)
+        let ran = Math.floor(Math.random() *3)
         if (data.Sender === Player.MemberNumber&& data.Type == "Chat") {
             if(msg.includes("+" + Player.Name.toLowerCase())) {
                 if (msg.includes("shockgag on")&&!personData.shockGagOwnerBlock) {
