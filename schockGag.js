@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Yui's slave script
 // @namespace    http://tampermonkey.net/
-// @version      0.1.1
+// @version      0.1.2
 // @description  try to take over the world!
 // @author       Yui
 // @match https://bondageprojects.elementfx.com/*
@@ -149,7 +149,7 @@ function main(data){
                                     " touches her skin she gets a shock on her nipples for that. "  }]
                     });
             }
-        else if(data.Type == "Activity" && personData.shockBells){
+        }else if(data.Type == "Activity" && personData.shockBells){
             let action = getActionsTagetedAtPlayer(data)
             if(data.Sender !== Player.MemberNumber && action!=null){
                 if((InventoryIsWorn(Player,"BellClitPiercing","ItemVulvaPiercings")||
@@ -164,7 +164,7 @@ function main(data){
                             [{Tag: "Beep", Text: Player.Name+ " shock bells" +
                                     " touches her skin she gets a shock on her vulva. " }]
                     });
-
+                }
             }
             if((InventoryIsWorn(Player,"BellPiercing","ItemNipplesPiercings")||
                 InventoryIsWorn(Player,"BellClamps","ItemNipples")||
@@ -179,7 +179,8 @@ function main(data){
                             [{Tag: "Beep", Text: Player.Name+ " shock bells" +
                                     " touches her skin she gets a shock on her nipples."  }]
                     });
-
+                }
+            
            // data.Content.includes("ItemBreast-Slap") ||
         }else if(data.Sender === Player.MemberNumber&& data.Type == "Action"){
             if (data.Content.includes("FuturisticPanelGagMouthSetAutoInflate") && personData.shockGag) {
