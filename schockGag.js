@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Yui's slave script
 // @namespace    http://tampermonkey.net/
-// @version      0.1.4
+// @version      0.1.5
 // @description  try to take over the world!
 // @author       Yui
 // @match https://bondageprojects.elementfx.com/*
@@ -122,8 +122,6 @@ function main(data){
                 data.Content.includes("ChatSelf-ItemPelvis-Wiggle")||
                 data.Content.includes("ChatSelf-ItemLegs-Wiggle") ||
                 data.Content.includes("ChatSelf-ItemTorso-Wiggle") ||
-
-                data.Content.includes("ItemVulva-Slap") ||
                 Math.floor(Math.random() * 1000)<shockrate)){
                 personData.process +=1
                 shock(Player,ran,0)
@@ -291,19 +289,3 @@ function loadPersonList(){
 function storePersonList(){
     localStorage.setItem(Player.MemberNumber+"_personList", JSON.stringify(personData));
 }
-
-/*
-error after
-{
-  "Sender": 35639,
-  "Content": "Orgasm8",
-  "Type": "Activity",
-  "Dictionary": [
-    {
-      "Tag": "SourceCharacter",
-      "Text": "Nyla",
-      "MemberNumber": 35639
-    }
-  ]
-}
-*/
