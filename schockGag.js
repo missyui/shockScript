@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Yui's slave script
 // @namespace    http://tampermonkey.net/
-// @version      0.1.5
+// @version      0.1.6
 // @description  try to take over the world!
 // @author       Yui
 // @match https://bondageprojects.elementfx.com/*
@@ -64,7 +64,7 @@ function main(data){
         loadPersonList()
         while (msg.indexOf("<") > -1) msg = msg.replace("<", "&lt;");
         while (msg.indexOf(">") > -1) msg = msg.replace(">", "&gt;");
-        let shockrate = 60 - personData.level
+        let shockrate = (60 - personData.level)/2
         let ran = Math.floor(Math.random() *3)
         if (data.Sender === Player.MemberNumber&& data.Type == "Chat") {
             if(msg.includes("+" + Player.Name.toLowerCase())) {
