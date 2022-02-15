@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Yui's slave script
 // @namespace    http://tampermonkey.net/
-// @version      0.1.6
+// @version      0.1.7
 // @description  try to take over the world!
 // @author       Yui
 // @match https://bondageprojects.elementfx.com/*
@@ -80,6 +80,9 @@ function main(data){
                 } else if (msg.includes("shockbells off")&&!personData.shockBellsOwnerBlock) {
                     whisper("The shock on "+Player.Name.toLowerCase()+" is deactivated",data.Sender)
                     personData.shockBells = false;
+                }else if (msg.includes("lock arms owner")) {
+                    whisper("arms locked",data.Sender)
+                    lock(Player,"ItemArms")
                 }
             }
             storePersonList()
@@ -269,7 +272,19 @@ function shock(player,intensity=0, place=0){
 
     ChatRoomPublishCustomAction("TriggerShock" + intensity, true, Dictionary);
 }
-
+function lock(target,item) {
+    if (InventoryGet(target, item) != null && InventoryGet(target, item) !== undefined) {
+        InventoryLock(target, InventoryGet(target, item),
+            {Asset: AssetGet("Female3DCG", "ItemMisc", "OwnerPadlock")})
+        if (InventoryGet(target, item).Property != null &&
+            InventoryGet(target, item).Property !== undefined) {
+            InventoryGet(target, item).Property.Effect = ["Lock"],
+                InventoryGet(target, item).Property.LockedBy = "OwnerPadlock",
+                InventoryGet(target, item).Property.LockMemberNumber = Player.MemberNumber
+            ChatRoomCharacterUpdate(target)
+        }
+    }
+}
 
 function whisper(msg, playerNR){
     ServerSend("ChatRoomChat",
