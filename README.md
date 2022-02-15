@@ -12,6 +12,8 @@
 
 >+username shockbells on/off
 
+>+username lock arms owner = adds owner locks on the current arm restraints for self bondage purposes 
+
 **owner commands via whisper:**
 >+username shockgag on/off
 
