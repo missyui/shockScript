@@ -29,7 +29,7 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 async function start() {
-    await waitFor(() => ServerSocket && ServerIsConnected);
+    await waitFor(() => ServerSocket && ServerIsConnected && typeof Player.MemberNumber !== "undefined");
     ServerSocket.on('ChatRoomMessage', main);
     loadPersonList()
 }
