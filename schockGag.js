@@ -14,6 +14,17 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-implicit-globals */
 
+class personDataDef {
+    shockGag = false
+    shockGagOwnerBlock = false
+    shockBells = false
+    shockBellsOwnerBlock = false
+    level = 0
+    process = 0
+}
+
+let personData = new personDataDef();
+
 async function waitFor(func, cancelFunc = () => false) {
     while (!func()) {
         if (cancelFunc()) {
@@ -29,23 +40,14 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 async function start() {
-    await waitFor(() => ServerSocket && ServerIsConnected);
-    ServerSocket.on('ChatRoomMessage', main);
+    await waitFor(() => ServerSocket && ServerIsConnected && typeof Player.MemberNumber !== "undefined");
     loadPersonList()
+    ServerSocket.on('ChatRoomMessage', main);
 }
 
 await start()
 
-class personDataDef {
-    shockGag = false
-    shockGagOwnerBlock = false
-    shockBells = false
-    shockBellsOwnerBlock = false
-    level = 0
-    process = 0
-}
 
-let personData = new personDataDef();
 
 function main(data){
     if ((data != null) &&
