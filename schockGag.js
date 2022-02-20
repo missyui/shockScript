@@ -43,7 +43,6 @@ async function start() {
     await waitFor(() => ServerSocket && ServerIsConnected && typeof Player.MemberNumber !== "undefined");
     loadPersonList()
     ServerSocket.on('ChatRoomMessage', main);
-    
 }
 
 await start()
