@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Yui's slave script
 // @namespace    http://tampermonkey.net/
-// @version      0.1.7
+// @version      0.1.8
 // @description  try to take over the world!
 // @author       Yui
 // @match https://bondageprojects.elementfx.com/*
@@ -85,6 +85,10 @@ function main(data){
                 }else if (msg.includes("lock arms owner")) {
                     whisper("arms locked",data.Sender)
                     lock(Player,"ItemArms")
+                }else if (msg.includes("allfour")) {
+                    whisper("allFour activated",data.Sender)
+                    CharacterSetActivePose(Player,["AllFours"],true)
+                    ChatRoomCharacterUpdate(Player);
                 }
             }
             storePersonList()

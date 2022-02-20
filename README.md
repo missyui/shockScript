@@ -14,6 +14,8 @@
 
 >+username lock arms owner = adds owner locks on the current arm restraints for self bondage purposes 
 
+>+username allFour = sets the pose to allFour for RP purposes
+
 **owner commands via whisper:**
 >+username shockgag on/off
 
