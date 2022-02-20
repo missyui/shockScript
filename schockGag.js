@@ -85,6 +85,10 @@ function main(data){
                 }else if (msg.includes("lock arms owner")) {
                     whisper("arms locked",data.Sender)
                     lock(Player,"ItemArms")
+                }else if (msg.includes("allfour")) {
+                    whisper("allFour activated",data.Sender)
+                    CharacterSetActivePose(Player,["AllFours"],true)
+                    ChatRoomCharacterUpdate(Player);
                 }
             }
             storePersonList()
