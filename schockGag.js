@@ -30,6 +30,7 @@ function sleep(ms) {
 }
 async function start() {
     await waitFor(() => ServerSocket && ServerIsConnected && typeof Player.MemberNumber !== "undefined");
+    await sleep(2000)
     ServerSocket.on('ChatRoomMessage', main);
     loadPersonList()
 }
