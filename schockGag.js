@@ -87,7 +87,7 @@ function main(data){
                     lock(Player,"ItemArms")
                 }else if (msg.includes("allfour")) {
                     whisper("allFour activated",data.Sender)
-                    CharacterSetActivePose(Player,["AllFours"],true)
+                    CharacterSetActivePose(Player,["AllFours"])
                     ChatRoomCharacterUpdate(Player);
                 }
             }
